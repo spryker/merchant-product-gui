@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\MerchantTransfer;
 
 interface MerchantProductGuiToMerchantProductFacadeInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\MerchantProductCriteriaTransfer $merchantProductCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\MerchantTransfer|null
-     */
     public function findMerchant(MerchantProductCriteriaTransfer $merchantProductCriteriaTransfer): ?MerchantTransfer;
 }

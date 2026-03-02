@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\QueryCriteriaTransfer;
 
 interface MerchantProductQueryCriteriaExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-     */
     public function expandQueryCriteria(QueryCriteriaTransfer $queryCriteriaTransfer): QueryCriteriaTransfer;
 }

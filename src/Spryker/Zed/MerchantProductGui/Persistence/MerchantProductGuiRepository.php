@@ -16,12 +16,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 class MerchantProductGuiRepository extends AbstractRepository implements MerchantProductGuiRepositoryInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     * @param \Generated\Shared\Transfer\MerchantProductCriteriaTransfer $merchantProductCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-     */
     public function expandQueryCriteriaTransferWithMerchantProductRelation(
         QueryCriteriaTransfer $queryCriteriaTransfer,
         MerchantProductCriteriaTransfer $merchantProductCriteriaTransfer

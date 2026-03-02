@@ -29,10 +29,6 @@ class MerchantProductQueryCriteriaExpander implements MerchantProductQueryCriter
      */
     protected $request;
 
-    /**
-     * @param \Spryker\Zed\MerchantProductGui\Persistence\MerchantProductGuiRepositoryInterface $merchantProductGuiRepository
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     */
     public function __construct(
         MerchantProductGuiRepositoryInterface $merchantProductGuiRepository,
         Request $request
@@ -41,11 +37,6 @@ class MerchantProductQueryCriteriaExpander implements MerchantProductQueryCriter
         $this->request = $request;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-     */
     public function expandQueryCriteria(QueryCriteriaTransfer $queryCriteriaTransfer): QueryCriteriaTransfer
     {
         $idMerchant = $this->request->get(static::URL_PARAM_ID_MERCHANT);
