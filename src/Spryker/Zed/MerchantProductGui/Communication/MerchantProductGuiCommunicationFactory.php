@@ -8,6 +8,9 @@
 namespace Spryker\Zed\MerchantProductGui\Communication;
 
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use Spryker\Zed\Merchant\Business\MerchantFacadeInterface;
+use Spryker\Zed\MerchantProductGui\Communication\Expander\MerchantProductAbstractFormExpander;
+use Spryker\Zed\MerchantProductGui\Communication\Expander\MerchantProductAbstractFormExpanderInterface;
 use Spryker\Zed\MerchantProductGui\Communication\Expander\MerchantProductQueryCriteriaExpander;
 use Spryker\Zed\MerchantProductGui\Communication\Expander\MerchantProductQueryCriteriaExpanderInterface;
 use Spryker\Zed\MerchantProductGui\Communication\Expander\MerchantProductViewDataExpander;
@@ -19,6 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @method \Spryker\Zed\MerchantProductGui\Persistence\MerchantProductGuiRepositoryInterface getRepository()
+ * @method \Spryker\Zed\MerchantProductGui\MerchantProductGuiConfig getConfig()
  */
 class MerchantProductGuiCommunicationFactory extends AbstractCommunicationFactory
 {
@@ -48,5 +52,19 @@ class MerchantProductGuiCommunicationFactory extends AbstractCommunicationFactor
     public function getMerchantProductFacade(): MerchantProductGuiToMerchantProductFacadeInterface
     {
         return $this->getProvidedDependency(MerchantProductGuiDependencyProvider::FACADE_MERCHANT_PRODUCT);
+    }
+
+    public function getMerchantFacade(): MerchantFacadeInterface
+    {
+        return $this->getProvidedDependency(MerchantProductGuiDependencyProvider::FACADE_MERCHANT);
+    }
+
+    public function createMerchantProductAbstractFormExpander(): MerchantProductAbstractFormExpanderInterface
+    {
+        return new MerchantProductAbstractFormExpander(
+            $this->getMerchantFacade(),
+            $this->getMerchantProductFacade(),
+            $this->getConfig(),
+        );
     }
 }

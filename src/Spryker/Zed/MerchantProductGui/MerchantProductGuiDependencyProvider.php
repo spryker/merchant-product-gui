@@ -9,14 +9,14 @@ namespace Spryker\Zed\MerchantProductGui;
 
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\Merchant\Business\MerchantFacadeInterface;
 use Spryker\Zed\MerchantProductGui\Dependency\Facade\MerchantProductGuiToMerchantProductFacadeBridge;
 
 class MerchantProductGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
-    /**
-     * @var string
-     */
-    public const FACADE_MERCHANT_PRODUCT = 'FACADE_MERCHANT_PRODUCT';
+    public const string FACADE_MERCHANT_PRODUCT = 'FACADE_MERCHANT_PRODUCT';
+
+    public const string FACADE_MERCHANT = 'FACADE_MERCHANT';
 
     /**
      * @uses \Spryker\Zed\Http\Communication\Plugin\Application\HttpApplicationPlugin::SERVICE_REQUEST_STACK
@@ -31,6 +31,7 @@ class MerchantProductGuiDependencyProvider extends AbstractBundleDependencyProvi
 
         $container = $this->addRequestStack($container);
         $container = $this->addMerchantProductFacade($container);
+        $container = $this->addMerchantFacade($container);
 
         return $container;
     }
@@ -50,6 +51,15 @@ class MerchantProductGuiDependencyProvider extends AbstractBundleDependencyProvi
             return new MerchantProductGuiToMerchantProductFacadeBridge(
                 $container->getLocator()->merchantProduct()->facade(),
             );
+        });
+
+        return $container;
+    }
+
+    protected function addMerchantFacade(Container $container): Container
+    {
+        $container->set(static::FACADE_MERCHANT, function (Container $container): MerchantFacadeInterface {
+            return $container->getLocator()->merchant()->facade();
         });
 
         return $container;
