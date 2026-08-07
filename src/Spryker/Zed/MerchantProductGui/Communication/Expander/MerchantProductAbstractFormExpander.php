@@ -78,15 +78,23 @@ class MerchantProductAbstractFormExpander implements MerchantProductAbstractForm
             return $formData;
         }
 
-        $merchantTransfer = $this->merchantProductFacade->findMerchant(
-            (new MerchantProductCriteriaTransfer())->setIdProductAbstract($productAbstractTransfer->getIdProductAbstract()),
-        );
+        $idMerchant = $productAbstractTransfer->getIdMerchant()
+            ?? $this->findIdMerchant($productAbstractTransfer->getIdProductAbstract());
 
-        if ($merchantTransfer !== null) {
-            $formData[static::FORM_FIELD_ID_MERCHANT] = $merchantTransfer->getIdMerchant();
+        if ($idMerchant !== null) {
+            $formData[static::FORM_FIELD_ID_MERCHANT] = $idMerchant;
         }
 
         return $formData;
+    }
+
+    protected function findIdMerchant(int $idProductAbstract): ?int
+    {
+        $merchantTransfer = $this->merchantProductFacade->findMerchant(
+            (new MerchantProductCriteriaTransfer())->setIdProductAbstract($idProductAbstract),
+        );
+
+        return $merchantTransfer?->getIdMerchant();
     }
 
     /**
